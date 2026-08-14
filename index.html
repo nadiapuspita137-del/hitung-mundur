@@ -7,146 +7,33 @@
   <title>Hitung Mundur - 2 September 2026</title>
   <style>
     * { box-sizing: border-box; }
-    :root {
-      --bg: #070b18;
-      --card: rgba(18, 25, 48, 0.78);
-      --text: #f8fafc;
-      --muted: #a8b1c7;
-      --accent: #7c5cff;
-      --accent2: #23d5ab;
-      --border: rgba(255,255,255,.12);
-    }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(124,92,255,.28), transparent 32%),
-        radial-gradient(circle at 85% 80%, rgba(35,213,171,.18), transparent 30%),
-        var(--bg);
-      transition: background 1s ease;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .22;
-      background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size: 42px 42px;
-    }
-    .container { width: min(1000px, 92vw); text-align: center; position: relative; z-index: 2; }
-    .badge {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: #d8d1ff;
-      background: rgba(124,92,255,.12);
-      font-size: .82rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    h1 { margin: 0; font-size: clamp(2rem, 6vw, 4.8rem); line-height: 1.02; letter-spacing: -.04em; }
-    .target { margin: 18px 0 20px; color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.3rem); }
-    .target strong { color: #fff; }
-    .current-time {
-      margin: 0 auto 38px;
-      color: #dbe4ff;
-      font-size: clamp(1.15rem, 3vw, 1.7rem);
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: .03em;
-    }
-    .current-time span { color: var(--accent2); }
-    .countdown {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    .unit {
-      padding: clamp(18px, 4vw, 34px) 12px;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: var(--card);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.25);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-    .unit:hover { transform: translateY(-5px); box-shadow: 0 25px 70px rgba(124,92,255,.18); }
-    .number { display: block; font-variant-numeric: tabular-nums; font-size: clamp(2.8rem, 8vw, 6.4rem); font-weight: 800; line-height: .95; letter-spacing: -.05em; }
-    .label { display: block; margin-top: 12px; color: var(--muted); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-    .done { font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 800; }
-    .footer { margin-top: 30px; color: #75809b; font-size: .82rem; }
-
-    /* Layar perayaan */
-    .celebration {
-      position: fixed;
-      inset: 0;
-      display: none;
-      place-items: center;
-      z-index: 10;
-      background: radial-gradient(circle at center, rgba(124,92,255,.32), rgba(7,11,24,.97) 65%);
-      animation: celebrationIn .8s ease forwards;
-    }
-    .celebration.active { display: grid; }
-    .celebration-content {
-      position: relative;
-      width: min(760px, 90vw);
-      padding: 55px 25px;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 32px;
-      background: rgba(15,20,42,.78);
-      backdrop-filter: blur(22px);
-      box-shadow: 0 30px 100px rgba(0,0,0,.5);
-      animation: pop .8s cubic-bezier(.17,.89,.32,1.28) forwards;
-    }
-    .celebration-emoji { font-size: clamp(3.5rem, 12vw, 7rem); animation: bounce 1.4s infinite; }
-    .celebration h2 { margin: 12px 0 10px; font-size: clamp(2.3rem, 7vw, 5.2rem); line-height: 1; }
-    .celebration p { margin: 0; color: #cbd5e1; font-size: clamp(1rem, 3vw, 1.35rem); }
-    .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
-    .confetti-piece {
-      position: absolute;
-      top: -30px;
-      width: 10px;
-      height: 18px;
-      animation: fall linear forwards;
-    }
-    .firework {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: white;
-      box-shadow: 0 0 18px 5px rgba(255,255,255,.8);
-      animation: firework 1.4s ease-out infinite;
-    }
-    .firework:nth-child(1) { left: 15%; top: 20%; }
-    .firework:nth-child(2) { right: 18%; top: 28%; animation-delay: .5s; }
-    .firework:nth-child(3) { left: 28%; bottom: 18%; animation-delay: .9s; }
-    .firework:nth-child(4) { right: 30%; bottom: 20%; animation-delay: .3s; }
-
-    @keyframes celebrationIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes pop { from { transform: scale(.75); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    @keyframes bounce { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-15px) rotate(5deg); } }
-    @keyframes fall { to { transform: translate3d(var(--drift), 110vh, 0) rotate(720deg); } }
-    @keyframes firework {
-      0% { transform: scale(.2); opacity: 1; box-shadow: 0 0 10px 2px white; }
-      60% { transform: scale(12); opacity: .8; box-shadow: 0 0 35px 12px rgba(124,92,255,.7); }
-      100% { transform: scale(16); opacity: 0; }
-    }
-    @media (max-width: 650px) {
-      .countdown { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .unit { border-radius: 18px; }
-      .target { margin-bottom: 16px; }
-      .current-time { margin-bottom: 28px; }
-      .celebration-content { padding: 42px 18px; border-radius: 24px; }
-    }
+    :root { --bg:#070b18; --card:rgba(18,25,48,.78); --text:#f8fafc; --muted:#a8b1c7; --accent:#7c5cff; --accent2:#23d5ab; --border:rgba(255,255,255,.12); }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; overflow:hidden; color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:radial-gradient(circle at 15% 20%,rgba(124,92,255,.28),transparent 32%),radial-gradient(circle at 85% 80%,rgba(35,213,171,.18),transparent 30%),var(--bg); transition:background 1s ease; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:42px 42px; }
+    .container { width:min(1000px,92vw); text-align:center; position:relative; z-index:2; }
+    .badge { display:inline-block; padding:8px 14px; border:1px solid var(--border); border-radius:999px; color:#d8d1ff; background:rgba(124,92,255,.12); font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:20px; }
+    h1 { margin:0; font-size:clamp(2rem,6vw,4.8rem); line-height:1.02; letter-spacing:-.04em; }
+    .target { margin:18px 0 18px; color:var(--muted); font-size:clamp(1rem,2.5vw,1.3rem); } .target strong { color:#fff; }
+    .current-date { margin:0 0 7px; color:#dbe4ff; font-size:clamp(1rem,2.5vw,1.35rem); font-weight:600; }
+    .current-date span { color:#b8c5e8; }
+    .current-time { margin:0 auto 38px; color:#fff; font-size:clamp(1.5rem,4vw,2.2rem); font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:.03em; text-shadow:0 0 24px rgba(35,213,171,.25); }
+    .current-time span { color:var(--accent2); }
+    .countdown { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .unit { padding:clamp(18px,4vw,34px) 12px; border:1px solid var(--border); border-radius:24px; background:var(--card); backdrop-filter:blur(16px); box-shadow:0 20px 60px rgba(0,0,0,.25); transition:transform .25s ease,box-shadow .25s ease; }
+    .unit:hover { transform:translateY(-5px); box-shadow:0 25px 70px rgba(124,92,255,.18); }
+    .number { display:block; font-variant-numeric:tabular-nums; font-size:clamp(2.8rem,8vw,6.4rem); font-weight:800; line-height:.95; letter-spacing:-.05em; }
+    .label { display:block; margin-top:12px; color:var(--muted); font-size:.8rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .done { font-size:clamp(2rem,6vw,4.5rem); font-weight:800; }
+    .footer { margin-top:30px; color:#75809b; font-size:.82rem; }
+    .celebration { position:fixed; inset:0; display:none; place-items:center; z-index:10; background:radial-gradient(circle at center,rgba(124,92,255,.32),rgba(7,11,24,.97) 65%); animation:celebrationIn .8s ease forwards; }
+    .celebration.active { display:grid; }
+    .celebration-content { position:relative; width:min(760px,90vw); padding:55px 25px; border:1px solid rgba(255,255,255,.18); border-radius:32px; background:rgba(15,20,42,.78); backdrop-filter:blur(22px); box-shadow:0 30px 100px rgba(0,0,0,.5); animation:pop .8s cubic-bezier(.17,.89,.32,1.28) forwards; }
+    .celebration-emoji { font-size:clamp(3.5rem,12vw,7rem); animation:bounce 1.4s infinite; } .celebration h2 { margin:12px 0 10px; font-size:clamp(2.3rem,7vw,5.2rem); line-height:1; } .celebration p { margin:0; color:#cbd5e1; font-size:clamp(1rem,3vw,1.35rem); }
+    .confetti { position:fixed; inset:0; pointer-events:none; overflow:hidden; } .confetti-piece { position:absolute; top:-30px; width:10px; height:18px; animation:fall linear forwards; }
+    .firework { position:absolute; width:6px; height:6px; border-radius:50%; background:white; box-shadow:0 0 18px 5px rgba(255,255,255,.8); animation:firework 1.4s ease-out infinite; }
+    .firework:nth-child(1){left:15%;top:20%}.firework:nth-child(2){right:18%;top:28%;animation-delay:.5s}.firework:nth-child(3){left:28%;bottom:18%;animation-delay:.9s}.firework:nth-child(4){right:30%;bottom:20%;animation-delay:.3s}
+    @keyframes celebrationIn { from{opacity:0}to{opacity:1} } @keyframes pop { from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1} } @keyframes bounce { 0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-15px) rotate(5deg)} } @keyframes fall { to{transform:translate3d(var(--drift),110vh,0) rotate(720deg)} } @keyframes firework { 0%{transform:scale(.2);opacity:1;box-shadow:0 0 10px 2px white}60%{transform:scale(12);opacity:.8;box-shadow:0 0 35px 12px rgba(124,92,255,.7)}100%{transform:scale(16);opacity:0} }
+    @media(max-width:650px){ .countdown{grid-template-columns:repeat(2,1fr);gap:12px}.unit{border-radius:18px}.target{margin-bottom:14px}.current-time{margin-bottom:28px}.celebration-content{padding:42px 18px;border-radius:24px} }
   </style>
 </head>
 <body>
@@ -154,91 +41,30 @@
     <div class="badge">Countdown</div>
     <h1>Menuju 2 September 2026</h1>
     <p class="target">Target: <strong>Rabu, 2 September 2026 · 19.00 WIB</strong></p>
+    <div class="current-date">Hari ini: <span id="currentDate">Memuat tanggal...</span></div>
     <div class="current-time">Waktu sekarang: <span id="currentTime">00:00:00 WIB</span></div>
-
     <section class="countdown" aria-label="Waktu tersisa">
       <div class="unit"><span class="number" id="days">00</span><span class="label">Hari</span></div>
       <div class="unit"><span class="number" id="hours">00</span><span class="label">Jam</span></div>
       <div class="unit"><span class="number" id="minutes">00</span><span class="label">Menit</span></div>
       <div class="unit"><span class="number" id="seconds">00</span><span class="label">Detik</span></div>
     </section>
-
     <p class="footer" id="status">Waktu berjalan otomatis mengikuti waktu WIB.</p>
   </main>
-
   <div class="celebration" id="celebration" aria-hidden="true">
-    <div class="confetti" id="confetti"></div>
-    <div class="firework"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div>
-    <div class="celebration-content">
-      <div class="celebration-emoji">🎉</div>
-      <h2>WAKTUNYA TIBA!</h2>
-      <p>2 September 2026 · 19.00 WIB</p>
-      <p style="margin-top:12px;">Momen yang ditunggu akhirnya datang.</p>
-    </div>
+    <div class="confetti" id="confetti"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div>
+    <div class="celebration-content"><div class="celebration-emoji">🎉</div><h2>WAKTUNYA TIBA!</h2><p>2 September 2026 · 19.00 WIB</p><p style="margin-top:12px;">Momen yang ditunggu akhirnya datang.</p></div>
   </div>
-
   <script>
-    const target = Date.UTC(2026, 8, 2, 12, 0, 0);
-    const $ = (id) => document.getElementById(id);
-    let finished = false;
-
-    function pad(value) { return String(value).padStart(2, '0'); }
-
-    function updateCurrentTime() {
-      const now = new Date();
-      const time = new Intl.DateTimeFormat('id-ID', {
-        timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
-      }).format(now);
-      $('currentTime').textContent = `${time} WIB`;
-    }
-
-    function launchConfetti() {
-      const container = $('confetti');
-      container.innerHTML = '';
-      for (let i = 0; i < 180; i++) {
-        const piece = document.createElement('span');
-        piece.className = 'confetti-piece';
-        piece.style.left = `${Math.random() * 100}%`;
-        piece.style.setProperty('--drift', `${(Math.random() - .5) * 260}px`);
-        piece.style.animationDuration = `${3 + Math.random() * 4}s`;
-        piece.style.animationDelay = `${Math.random() * 2}s`;
-        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
-        piece.style.background = ['#7c5cff','#23d5ab','#ffd166','#ff5c8a','#4cc9f0','#ffffff'][Math.floor(Math.random() * 6)];
-        piece.style.borderRadius = Math.random() > .5 ? '2px' : '50%';
-        container.appendChild(piece);
-      }
-    }
-
-    function showCelebration() {
-      if (finished) return;
-      finished = true;
-      document.querySelector('.countdown').innerHTML = '<div class="done" style="grid-column: 1 / -1;">🎊 WAKTUNYA TIBA! 🎊</div>';
-      $('status').textContent = 'Target 2 September 2026, 19.00 WIB telah tercapai!';
-      $('celebration').classList.add('active');
-      $('celebration').setAttribute('aria-hidden', 'false');
-      document.body.style.background = '#090b20';
-      launchConfetti();
-    }
-
-    function updateCountdown() {
-      updateCurrentTime();
-      const remaining = target - Date.now();
-      if (remaining <= 0) { showCelebration(); return; }
-
-      const totalSeconds = Math.floor(remaining / 1000);
-      const days = Math.floor(totalSeconds / 86400);
-      const hours = Math.floor((totalSeconds % 86400) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      $('days').textContent = days;
-      $('hours').textContent = pad(hours);
-      $('minutes').textContent = pad(minutes);
-      $('seconds').textContent = pad(seconds);
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    const target=Date.UTC(2026,8,2,12,0,0),$=id=>document.getElementById(id); let finished=false;
+    const dateFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    const timeFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    function pad(v){return String(v).padStart(2,'0')}
+    function updateCurrentDateTime(){const now=new Date();$('currentDate').textContent=dateFormatter.format(now);$('currentTime').textContent=`${timeFormatter.format(now)} WIB`}
+    function launchConfetti(){const c=$('confetti');c.innerHTML='';for(let i=0;i<180;i++){const p=document.createElement('span');p.className='confetti-piece';p.style.left=`${Math.random()*100}%`;p.style.setProperty('--drift',`${(Math.random()-.5)*260}px`);p.style.animationDuration=`${3+Math.random()*4}s`;p.style.animationDelay=`${Math.random()*2}s`;p.style.transform=`rotate(${Math.random()*360}deg)`;p.style.background=['#7c5cff','#23d5ab','#ffd166','#ff5c8a','#4cc9f0','#fff'][Math.floor(Math.random()*6)];p.style.borderRadius=Math.random()>.5?'2px':'50%';c.appendChild(p)}}
+    function showCelebration(){if(finished)return;finished=true;document.querySelector('.countdown').innerHTML='<div class="done" style="grid-column:1/-1;">🎊 WAKTUNYA TIBA! 🎊</div>';$('status').textContent='Target 2 September 2026, 19.00 WIB telah tercapai!';$('celebration').classList.add('active');$('celebration').setAttribute('aria-hidden','false');document.body.style.background='#090b20';launchConfetti()}
+    function updateCountdown(){updateCurrentDateTime();const remaining=target-Date.now();if(remaining<=0){showCelebration();return}const total=Math.floor(remaining/1000),days=Math.floor(total/86400),hours=Math.floor(total%86400/3600),minutes=Math.floor(total%3600/60),seconds=total%60;$('days').textContent=days;$('hours').textContent=pad(hours);$('minutes').textContent=pad(minutes);$('seconds').textContent=pad(seconds)}
+    updateCountdown();setInterval(updateCountdown,1000);
   </script>
 </body>
 </html>
