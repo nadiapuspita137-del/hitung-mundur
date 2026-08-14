@@ -6,64 +6,81 @@
   <meta name="description" content="Hitung mundur menuju 2 September 2026 pukul 19.00 WIB.">
   <title>Hitung Mundur - 2 September 2026</title>
   <style>
-    * { box-sizing: border-box; }
-    :root { --bg:#070b18; --card:rgba(18,25,48,.78); --text:#f8fafc; --muted:#a8b1c7; --accent:#7c5cff; --accent2:#23d5ab; --border:rgba(255,255,255,.12); }
-    body { margin:0; min-height:100vh; display:grid; place-items:center; overflow:hidden; color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:radial-gradient(circle at 15% 20%,rgba(124,92,255,.28),transparent 32%),radial-gradient(circle at 85% 80%,rgba(35,213,171,.18),transparent 30%),var(--bg); transition:background 1s ease; }
-    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:42px 42px; }
-    .container { width:min(1000px,92vw); text-align:center; position:relative; z-index:2; }
-    .badge { display:inline-block; padding:8px 14px; border:1px solid var(--border); border-radius:999px; color:#d8d1ff; background:rgba(124,92,255,.12); font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:20px; }
-    h1 { margin:0; font-size:clamp(2rem,6vw,4.8rem); line-height:1.02; letter-spacing:-.04em; }
-    .target { margin:18px 0 18px; color:var(--muted); font-size:clamp(1rem,2.5vw,1.3rem); } .target strong { color:#fff; }
-    .current-date { margin:0 0 7px; color:#dbe4ff; font-size:clamp(1rem,2.5vw,1.35rem); font-weight:600; }
-    .current-date span { color:#b8c5e8; }
-    .current-time { margin:0 auto 38px; color:#fff; font-size:clamp(1.5rem,4vw,2.2rem); font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:.03em; text-shadow:0 0 24px rgba(35,213,171,.25); }
-    .current-time span { color:var(--accent2); }
-    .countdown { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-    .unit { padding:clamp(18px,4vw,34px) 12px; border:1px solid var(--border); border-radius:24px; background:var(--card); backdrop-filter:blur(16px); box-shadow:0 20px 60px rgba(0,0,0,.25); transition:transform .25s ease,box-shadow .25s ease; }
-    .unit:hover { transform:translateY(-5px); box-shadow:0 25px 70px rgba(124,92,255,.18); }
-    .number { display:block; font-variant-numeric:tabular-nums; font-size:clamp(2.8rem,8vw,6.4rem); font-weight:800; line-height:.95; letter-spacing:-.05em; }
-    .label { display:block; margin-top:12px; color:var(--muted); font-size:.8rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
-    .done { font-size:clamp(2rem,6vw,4.5rem); font-weight:800; }
-    .footer { margin-top:30px; color:#75809b; font-size:.82rem; }
-    .celebration { position:fixed; inset:0; display:none; place-items:center; z-index:10; background:radial-gradient(circle at center,rgba(124,92,255,.32),rgba(7,11,24,.97) 65%); animation:celebrationIn .8s ease forwards; }
-    .celebration.active { display:grid; }
-    .celebration-content { position:relative; width:min(760px,90vw); padding:55px 25px; border:1px solid rgba(255,255,255,.18); border-radius:32px; background:rgba(15,20,42,.78); backdrop-filter:blur(22px); box-shadow:0 30px 100px rgba(0,0,0,.5); animation:pop .8s cubic-bezier(.17,.89,.32,1.28) forwards; }
-    .celebration-emoji { font-size:clamp(3.5rem,12vw,7rem); animation:bounce 1.4s infinite; } .celebration h2 { margin:12px 0 10px; font-size:clamp(2.3rem,7vw,5.2rem); line-height:1; } .celebration p { margin:0; color:#cbd5e1; font-size:clamp(1rem,3vw,1.35rem); }
-    .confetti { position:fixed; inset:0; pointer-events:none; overflow:hidden; } .confetti-piece { position:absolute; top:-30px; width:10px; height:18px; animation:fall linear forwards; }
-    .firework { position:absolute; width:6px; height:6px; border-radius:50%; background:white; box-shadow:0 0 18px 5px rgba(255,255,255,.8); animation:firework 1.4s ease-out infinite; }
-    .firework:nth-child(1){left:15%;top:20%}.firework:nth-child(2){right:18%;top:28%;animation-delay:.5s}.firework:nth-child(3){left:28%;bottom:18%;animation-delay:.9s}.firework:nth-child(4){right:30%;bottom:20%;animation-delay:.3s}
-    @keyframes celebrationIn { from{opacity:0}to{opacity:1} } @keyframes pop { from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1} } @keyframes bounce { 0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-15px) rotate(5deg)} } @keyframes fall { to{transform:translate3d(var(--drift),110vh,0) rotate(720deg)} } @keyframes firework { 0%{transform:scale(.2);opacity:1;box-shadow:0 0 10px 2px white}60%{transform:scale(12);opacity:.8;box-shadow:0 0 35px 12px rgba(124,92,255,.7)}100%{transform:scale(16);opacity:0} }
-    @media(max-width:650px){ .countdown{grid-template-columns:repeat(2,1fr);gap:12px}.unit{border-radius:18px}.target{margin-bottom:14px}.current-time{margin-bottom:28px}.celebration-content{padding:42px 18px;border-radius:24px} }
+    *{box-sizing:border-box}
+    :root{--bg:#050816;--card:rgba(15,22,48,.62);--text:#f8fafc;--muted:#a8b1c7;--accent:#7c5cff;--accent2:#23d5ab;--border:rgba(255,255,255,.13);--mx:50%;--my:50%}
+    html,body{min-height:100%;margin:0}
+    body{min-height:100vh;display:grid;place-items:center;overflow:hidden;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at var(--mx) var(--my),rgba(124,92,255,.2),transparent 25%),radial-gradient(circle at 15% 20%,rgba(124,92,255,.28),transparent 32%),radial-gradient(circle at 85% 80%,rgba(35,213,171,.18),transparent 30%),var(--bg);perspective:1200px;transition:background .5s ease}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:42px 42px}
+    .stars{position:fixed;inset:0;pointer-events:none;overflow:hidden}.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.35;animation:twinkle 3s ease-in-out infinite}
+    .orb{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;left:50%;top:50%;transform:translate(-50%,-50%) translate3d(calc(var(--ox,0px)),calc(var(--oy,0px)),0);background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.85) 0 2%,rgba(124,92,255,.8) 10%,rgba(35,213,171,.28) 38%,transparent 68%);filter:blur(1px);opacity:.12;box-shadow:0 0 100px rgba(124,92,255,.25),inset -40px -30px 80px rgba(0,0,0,.35);animation:orbFloat 8s ease-in-out infinite;z-index:0}
+    .orb::after{content:"";position:absolute;inset:-25px;border:1px solid rgba(124,92,255,.22);border-radius:50%;transform:rotateX(70deg) rotateZ(25deg);box-shadow:0 0 30px rgba(35,213,171,.12)}
+    .container{width:min(1000px,92vw);text-align:center;position:relative;z-index:2;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);transition:transform .18s ease-out}
+    .container::before{content:"";position:absolute;inset:-60px;border-radius:60px;background:radial-gradient(circle at 50% 50%,rgba(124,92,255,.1),transparent 65%);filter:blur(25px);z-index:-1;transform:translateZ(-80px)}
+    .badge{display:inline-block;padding:8px 14px;border:1px solid var(--border);border-radius:999px;color:#d8d1ff;background:rgba(124,92,255,.12);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;box-shadow:0 10px 35px rgba(0,0,0,.18);transform:translateZ(35px)}
+    h1{margin:0;font-size:clamp(2rem,6vw,4.8rem);line-height:1.02;letter-spacing:-.04em;text-shadow:0 8px 35px rgba(0,0,0,.35);transform:translateZ(45px)}
+    .target{margin:18px 0 18px;color:var(--muted);font-size:clamp(1rem,2.5vw,1.3rem);transform:translateZ(30px)}.target strong{color:#fff}
+    .current-date{margin:0 0 7px;color:#dbe4ff;font-size:clamp(1rem,2.5vw,1.35rem);font-weight:600;transform:translateZ(28px)}.current-date span{color:#b8c5e8}
+    .current-time{margin:0 auto 38px;color:#fff;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.03em;text-shadow:0 0 24px rgba(35,213,171,.25);transform:translateZ(40px)}.current-time span{color:var(--accent2)}
+    .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;transform-style:preserve-3d}
+    .unit{position:relative;overflow:hidden;padding:clamp(18px,4vw,34px) 12px;border:1px solid var(--border);border-radius:24px;background:linear-gradient(145deg,rgba(30,39,77,.68),rgba(9,14,32,.72));backdrop-filter:blur(18px);box-shadow:0 20px 60px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.07);transform:translateZ(25px) rotateX(var(--cx,0deg)) rotateY(var(--cy,0deg));transform-style:preserve-3d;transition:transform .15s ease-out,box-shadow .25s ease,border-color .25s ease}
+    .unit::before{content:"";position:absolute;inset:-50%;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.14),transparent 18%);pointer-events:none;transition:opacity .2s}
+    .unit::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid transparent;background:linear-gradient(120deg,rgba(124,92,255,.35),transparent 40%,rgba(35,213,171,.22)) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:.45;pointer-events:none}
+    .unit:hover{box-shadow:0 28px 80px rgba(124,92,255,.2),inset 0 1px rgba(255,255,255,.1);border-color:rgba(255,255,255,.22)}
+    .number{display:block;font-variant-numeric:tabular-nums;font-size:clamp(2.8rem,8vw,6.4rem);font-weight:800;line-height:.95;letter-spacing:-.05em;transform:translateZ(38px);text-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .label{display:block;margin-top:12px;color:var(--muted);font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;transform:translateZ(25px)}
+    .footer{margin-top:30px;color:#75809b;font-size:.82rem;transform:translateZ(25px)}.done{font-size:clamp(2rem,6vw,4.5rem);font-weight:800}
+    .hint{margin-top:12px;color:#5f6b88;font-size:.72rem;opacity:.8;transform:translateZ(20px)}
+    .celebration{position:fixed;inset:0;display:none;place-items:center;z-index:10;background:radial-gradient(circle at center,rgba(124,92,255,.32),rgba(7,11,24,.97) 65%);animation:celebrationIn .8s ease forwards}
+    .celebration.active{display:grid}.celebration-content{position:relative;width:min(760px,90vw);padding:55px 25px;border:1px solid rgba(255,255,255,.18);border-radius:32px;background:rgba(15,20,42,.78);backdrop-filter:blur(22px);box-shadow:0 30px 100px rgba(0,0,0,.5);animation:pop .8s cubic-bezier(.17,.89,.32,1.28) forwards}.celebration-emoji{font-size:clamp(3.5rem,12vw,7rem);animation:bounce 1.4s infinite}.celebration h2{margin:12px 0 10px;font-size:clamp(2.3rem,7vw,5.2rem);line-height:1}.celebration p{margin:0;color:#cbd5e1;font-size:clamp(1rem,3vw,1.35rem)}
+    .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}.confetti-piece{position:absolute;top:-30px;width:10px;height:18px;animation:fall linear forwards}.firework{position:absolute;width:6px;height:6px;border-radius:50%;background:white;box-shadow:0 0 18px 5px rgba(255,255,255,.8);animation:firework 1.4s ease-out infinite}.firework:nth-child(1){left:15%;top:20%}.firework:nth-child(2){right:18%;top:28%;animation-delay:.5s}.firework:nth-child(3){left:28%;bottom:18%;animation-delay:.9s}.firework:nth-child(4){right:30%;bottom:20%;animation-delay:.3s}
+    @keyframes twinkle{0%,100%{transform:scale(.5);opacity:.15}50%{transform:scale(1.5);opacity:.8}}@keyframes orbFloat{0%,100%{margin-top:-15px;transform:translate(-50%,-50%) translate3d(var(--ox,0px),var(--oy,0px),0) scale(1)}50%{margin-top:15px;transform:translate(-50%,-50%) translate3d(var(--ox,0px),var(--oy,0px),0) scale(1.08)}}@keyframes celebrationIn{from{opacity:0}to{opacity:1}}@keyframes pop{from{transform:scale(.75);opacity:0}to{transform:scale(1);opacity:1}}@keyframes bounce{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-15px) rotate(5deg)}}@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(720deg)}}@keyframes firework{0%{transform:scale(.2);opacity:1;box-shadow:0 0 10px 2px white}60%{transform:scale(12);opacity:.8;box-shadow:0 0 35px 12px rgba(124,92,255,.7)}100%{transform:scale(16);opacity:0}}
+    @media(max-width:650px){body{overflow:auto;min-height:100vh;padding:40px 0}.orb{width:220px;height:220px}.countdown{grid-template-columns:repeat(2,1fr);gap:12px}.unit{border-radius:18px}.target{margin-bottom:14px}.current-time{margin-bottom:28px}.celebration-content{padding:42px 18px;border-radius:24px}.hint{display:none}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <main class="container">
-    <div class="badge">Countdown</div>
+  <div class="stars" id="stars"></div><div class="orb" id="orb"></div>
+  <main class="container" id="scene">
+    <div class="badge">Countdown • Interactive 3D</div>
     <h1>Menuju 2 September 2026</h1>
     <p class="target">Target: <strong>Rabu, 2 September 2026 · 19.00 WIB</strong></p>
     <div class="current-date">Hari ini: <span id="currentDate">Memuat tanggal...</span></div>
     <div class="current-time">Waktu sekarang: <span id="currentTime">00:00:00 WIB</span></div>
-    <section class="countdown" aria-label="Waktu tersisa">
+    <section class="countdown" id="countdown" aria-label="Waktu tersisa">
       <div class="unit"><span class="number" id="days">00</span><span class="label">Hari</span></div>
       <div class="unit"><span class="number" id="hours">00</span><span class="label">Jam</span></div>
       <div class="unit"><span class="number" id="minutes">00</span><span class="label">Menit</span></div>
       <div class="unit"><span class="number" id="seconds">00</span><span class="label">Detik</span></div>
     </section>
     <p class="footer" id="status">Waktu berjalan otomatis mengikuti waktu WIB.</p>
+    <div class="hint">Gerakkan kursor • kartu ikut miring • cahaya mengikuti gerakanmu</div>
   </main>
+
   <div class="celebration" id="celebration" aria-hidden="true">
     <div class="confetti" id="confetti"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div>
     <div class="celebration-content"><div class="celebration-emoji">🎉</div><h2>WAKTUNYA TIBA!</h2><p>2 September 2026 · 19.00 WIB</p><p style="margin-top:12px;">Momen yang ditunggu akhirnya datang.</p></div>
   </div>
+
   <script>
-    const target=Date.UTC(2026,8,2,12,0,0),$=id=>document.getElementById(id); let finished=false;
+    const target=Date.UTC(2026,8,2,12,0,0),$=id=>document.getElementById(id);let finished=false;
     const dateFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',weekday:'long',day:'numeric',month:'long',year:'numeric'});
     const timeFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
     function pad(v){return String(v).padStart(2,'0')}
     function updateCurrentDateTime(){const now=new Date();$('currentDate').textContent=dateFormatter.format(now);$('currentTime').textContent=`${timeFormatter.format(now)} WIB`}
     function launchConfetti(){const c=$('confetti');c.innerHTML='';for(let i=0;i<180;i++){const p=document.createElement('span');p.className='confetti-piece';p.style.left=`${Math.random()*100}%`;p.style.setProperty('--drift',`${(Math.random()-.5)*260}px`);p.style.animationDuration=`${3+Math.random()*4}s`;p.style.animationDelay=`${Math.random()*2}s`;p.style.transform=`rotate(${Math.random()*360}deg)`;p.style.background=['#7c5cff','#23d5ab','#ffd166','#ff5c8a','#4cc9f0','#fff'][Math.floor(Math.random()*6)];p.style.borderRadius=Math.random()>.5?'2px':'50%';c.appendChild(p)}}
-    function showCelebration(){if(finished)return;finished=true;document.querySelector('.countdown').innerHTML='<div class="done" style="grid-column:1/-1;">🎊 WAKTUNYA TIBA! 🎊</div>';$('status').textContent='Target 2 September 2026, 19.00 WIB telah tercapai!';$('celebration').classList.add('active');$('celebration').setAttribute('aria-hidden','false');document.body.style.background='#090b20';launchConfetti()}
+    function showCelebration(){if(finished)return;finished=true;$('countdown').innerHTML='<div class="done" style="grid-column:1/-1;">🎊 WAKTUNYA TIBA! 🎊</div>';$('status').textContent='Target 2 September 2026, 19.00 WIB telah tercapai!';$('celebration').classList.add('active');$('celebration').setAttribute('aria-hidden','false');document.body.style.background='#090b20';launchConfetti()}
     function updateCountdown(){updateCurrentDateTime();const remaining=target-Date.now();if(remaining<=0){showCelebration();return}const total=Math.floor(remaining/1000),days=Math.floor(total/86400),hours=Math.floor(total%86400/3600),minutes=Math.floor(total%3600/60),seconds=total%60;$('days').textContent=days;$('hours').textContent=pad(hours);$('minutes').textContent=pad(minutes);$('seconds').textContent=pad(seconds)}
+
+    // Bintang-bintang hidup di background.
+    const stars=$('stars');for(let i=0;i<70;i++){const s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';s.style.animationDuration=2+Math.random()*4+'s';s.style.transform=`scale(${.4+Math.random()*1.4})`;stars.appendChild(s)}
+
+    // Efek parallax 3D mengikuti mouse.
+    const scene=$('scene'),orb=$('orb'),cards=[...document.querySelectorAll('.unit')];
+    function reset3D(){scene.style.setProperty('--rx','0deg');scene.style.setProperty('--ry','0deg');orb.style.setProperty('--ox','0px');orb.style.setProperty('--oy','0px');cards.forEach(c=>{c.style.setProperty('--cx','0deg');c.style.setProperty('--cy','0deg');c.style.setProperty('--gx','50%');c.style.setProperty('--gy','50%')})}
+    window.addEventListener('pointermove',e=>{if(window.innerWidth<700)return;const x=e.clientX/window.innerWidth-.5,y=e.clientY/window.innerHeight-.5;document.documentElement.style.setProperty('--mx',`${e.clientX/window.innerWidth*100}%`);document.documentElement.style.setProperty('--my',`${e.clientY/window.innerHeight*100}%`);scene.style.setProperty('--rx',`${-y*4}deg`);scene.style.setProperty('--ry',`${x*5}deg`);orb.style.setProperty('--ox',`${x*120}px`);orb.style.setProperty('--oy',`${y*90}px`);cards.forEach((c,i)=>{const r=c.getBoundingClientRect(),cx=(e.clientX-(r.left+r.width/2))/(r.width/2),cy=(e.clientY-(r.top+r.height/2))/(r.height/2);c.style.setProperty('--cx',`${-cy*7}deg`);c.style.setProperty('--cy',`${cx*7}deg`);c.style.setProperty('--gx',`${(cx+1)*50}%`);c.style.setProperty('--gy',`${(cy+1)*50}%`)})});
+    window.addEventListener('pointerleave',reset3D);
+    window.addEventListener('touchmove',e=>{const t=e.touches[0];if(!t)return;const x=t.clientX/window.innerWidth-.5,y=t.clientY/window.innerHeight-.5;orb.style.setProperty('--ox',`${x*70}px`);orb.style.setProperty('--oy',`${y*60}px`)},{passive:true});
+
     updateCountdown();setInterval(updateCountdown,1000);
   </script>
 </body>
