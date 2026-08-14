@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hitung mundur menuju 2 September 2026 pukul 19.00 WIB.">
+  <title>Hitung Mundur - 2 September 2026</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #070b18;
+      --card: rgba(18, 25, 48, 0.78);
+      --text: #f8fafc;
+      --muted: #a8b1c7;
+      --accent: #7c5cff;
+      --accent2: #23d5ab;
+      --border: rgba(255,255,255,.12);
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,.28), transparent 32%),
+        radial-gradient(circle at 85% 80%, rgba(35,213,171,.18), transparent 30%),
+        var(--bg);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+    }
+    .container { width: min(1000px, 92vw); text-align: center; position: relative; }
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: #d8d1ff;
+      background: rgba(124,92,255,.12);
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h1 { margin: 0; font-size: clamp(2rem, 6vw, 4.8rem); line-height: 1.02; letter-spacing: -.04em; }
+    .target { margin: 18px 0 42px; color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.3rem); }
+    .target strong { color: #fff; }
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .unit {
+      padding: clamp(18px, 4vw, 34px) 12px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .number { display: block; font-variant-numeric: tabular-nums; font-size: clamp(2.8rem, 8vw, 6.4rem); font-weight: 800; line-height: .95; letter-spacing: -.05em; }
+    .label { display: block; margin-top: 12px; color: var(--muted); font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .done { font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 800; }
+    .footer { margin-top: 30px; color: #75809b; font-size: .82rem; }
+    @media (max-width: 650px) {
+      .countdown { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .unit { border-radius: 18px; }
+      .target { margin-bottom: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="badge">Countdown</div>
+    <h1>Menuju 2 September 2026</h1>
+    <p class="target">Target: <strong>Rabu, 2 September 2026 · 19.00 WIB</strong></p>
+
+    <section class="countdown" aria-label="Waktu tersisa">
+      <div class="unit"><span class="number" id="days">00</span><span class="label">Hari</span></div>
+      <div class="unit"><span class="number" id="hours">00</span><span class="label">Jam</span></div>
+      <div class="unit"><span class="number" id="minutes">00</span><span class="label">Menit</span></div>
+      <div class="unit"><span class="number" id="seconds">00</span><span class="label">Detik</span></div>
+    </section>
+
+    <p class="footer" id="status">Waktu berjalan otomatis berdasarkan jam perangkatmu.</p>
+  </main>
+
+  <script>
+    // 2 September 2026 pukul 19:00 WIB = 2 September 2026 pukul 12:00 UTC.
+    const target = Date.UTC(2026, 8, 2, 12, 0, 0);
+    const $ = (id) => document.getElementById(id);
+
+    function pad(value) {
+      return String(value).padStart(2, '0');
+    }
+
+    function updateCountdown() {
+      const remaining = target - Date.now();
+
+      if (remaining <= 0) {
+        document.querySelector('.countdown').innerHTML = '<div class="done" style="grid-column: 1 / -1;">Waktunya tiba! 🎉</div>';
+        $('status').textContent = '2 September 2026, 19.00 WIB telah tiba.';
+        clearInterval(timer);
+        return;
+      }
+
+      const totalSeconds = Math.floor(remaining / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      $('days').textContent = days;
+      $('hours').textContent = pad(hours);
+      $('minutes').textContent = pad(minutes);
+      $('seconds').textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
