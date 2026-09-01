@@ -24,7 +24,7 @@ function launchBouncingInstance(video,index){
   let x=Math.random()*Math.max(1,innerWidth-video.offsetWidth);
   let y=Math.random()*Math.max(1,innerHeight-video.offsetHeight);
   const angle=(28+Math.random()*34)*Math.PI/180;
-  const speed=2.3+Math.random()*.9;
+  const speed=4.0+Math.random()*1.2;
   let vx=Math.cos(angle)*speed*(Math.random()<.5?-1:1);
   let vy=Math.sin(angle)*speed*(Math.random()<.5?-1:1);
   const move=()=>{
