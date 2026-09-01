@@ -13,27 +13,46 @@
 <div class="celebration" id="celebration" aria-hidden="true"><div class="confetti" id="confetti"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div><div class="firework"></div><div class="celebration-content"><div class="celebration-emoji">🎉</div><h2>WAKTUNYA TIBA!</h2><p>2 September 2026 · 19.00 WIB</p><p style="margin-top:10px">Momen yang ditunggu akhirnya datang.</p><button class="music-button" id="musicButton" type="button">▶ Putar Musik</button></div></div><iframe class="music-frame" id="musicFrame" title="Musik perayaan" allow="autoplay; encrypted-media" src="https://www.youtube.com/embed/NgedpM87U90?enablejsapi=1&autoplay=0&controls=0&rel=0&playsinline=1"></iframe>
 <script>
 const VIDEO_TEST_MODE=true;
-const target=Date.UTC(2026,8,2,12,0,0),$=id=>document.getElementById(id);let finished=false,raf=0;const dateFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',weekday:'long',day:'numeric',month:'long',year:'numeric'}),timeFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});function pad(v){return String(v).padStart(2,'0')}function updateCurrentDateTime(){const now=new Date();$('currentDate').textContent=dateFormatter.format(now);$('currentTime').textContent=`${timeFormatter.format(now)} WIB`}function playMusic(){try{$('musicFrame').contentWindow.postMessage(JSON.stringify({event:'command',func:'playVideo',args:[]}),'https://www.youtube.com')}catch(e){}$('musicButton').classList.remove('show')}function launchConfetti(){const c=$('confetti');c.innerHTML='';const frag=document.createDocumentFragment();for(let i=0;i<90;i++){const p=document.createElement('span');p.className='confetti-piece';p.style.left=`${Math.random()*100}%`;p.style.setProperty('--drift',`${(Math.random()-.5)*220}px`);p.style.animationDuration=`${2.5+Math.random()*3}s`;p.style.animationDelay=`${Math.random()*1.5}s`;p.style.background=['#7c5cff','#23d5ab','#ffd166','#ff5c8a','#4cc9f0','#fff'][Math.floor(Math.random()*6)];frag.appendChild(p)}c.appendChild(frag)}let bounceX=24,bounceY=24,bounceVX=2.25,bounceVY=1.85,bounceRaf=0;
-function startBouncingVideo(){
-  const video=$('bouncingVideo');
-  if(!video||video.classList.contains('active'))return;
+const target=Date.UTC(2026,8,2,12,0,0),$=id=>document.getElementById(id);let finished=false,raf=0;const dateFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',weekday:'long',day:'numeric',month:'long',year:'numeric'}),timeFormatter=new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});function pad(v){return String(v).padStart(2,'0')}function updateCurrentDateTime(){const now=new Date();$('currentDate').textContent=dateFormatter.format(now);$('currentTime').textContent=`${timeFormatter.format(now)} WIB`}function playMusic(){try{$('musicFrame').contentWindow.postMessage(JSON.stringify({event:'command',func:'playVideo',args:[]}),'https://www.youtube.com')}catch(e){}$('musicButton').classList.remove('show')}function launchConfetti(){const c=$('confetti');c.innerHTML='';const frag=document.createDocumentFragment();for(let i=0;i<90;i++){const p=document.createElement('span');p.className='confetti-piece';p.style.left=`${Math.random()*100}%`;p.style.setProperty('--drift',`${(Math.random()-.5)*220}px`);p.style.animationDuration=`${2.5+Math.random()*3}s`;p.style.animationDelay=`${Math.random()*1.5}s`;p.style.background=['#7c5cff','#23d5ab','#ffd166','#ff5c8a','#4cc9f0','#fff'][Math.floor(Math.random()*6)];frag.appendChild(p)}c.appendChild(frag)}let bouncingStarted=false,bouncingSpawnTimer=0;
+function launchBouncingInstance(video,index){
+  video.removeAttribute('id');
   video.classList.add('active');
-  const angle=(25+Math.random()*40)*Math.PI/180;
-  const speed=2.2;
-  bounceVX=Math.cos(angle)*speed*(Math.random()<.5?-1:1);
-  bounceVY=Math.sin(angle)*speed*(Math.random()<.5?-1:1);
+  video.setAttribute('aria-label',`Video perayaan ${index+1}`);
+  video.muted=true;
+  video.currentTime=0;
   video.play().catch(()=>{});
+  let x=Math.random()*Math.max(1,innerWidth-video.offsetWidth);
+  let y=Math.random()*Math.max(1,innerHeight-video.offsetHeight);
+  const angle=(28+Math.random()*34)*Math.PI/180;
+  const speed=1.9+Math.random()*.8;
+  let vx=Math.cos(angle)*speed*(Math.random()<.5?-1:1);
+  let vy=Math.sin(angle)*speed*(Math.random()<.5?-1:1);
   const move=()=>{
     const maxX=Math.max(0,innerWidth-video.offsetWidth);
     const maxY=Math.max(0,innerHeight-video.offsetHeight);
-    bounceX+=bounceVX;bounceY+=bounceVY;
-    if(bounceX<=0||bounceX>=maxX){bounceVX*=-1;bounceX=Math.max(0,Math.min(maxX,bounceX))}
-    if(bounceY<=0||bounceY>=maxY){bounceVY*=-1;bounceY=Math.max(0,Math.min(maxY,bounceY))}
-    video.style.transform=`translate3d(${bounceX}px,${bounceY}px,0)`;
-    bounceRaf=requestAnimationFrame(move);
+    x+=vx;y+=vy;
+    if(x<=0||x>=maxX){vx*=-1;x=Math.max(0,Math.min(maxX,x))}
+    if(y<=0||y>=maxY){vy*=-1;y=Math.max(0,Math.min(maxY,y))}
+    video.style.transform=`translate3d(${x}px,${y}px,0)`;
+    requestAnimationFrame(move);
   };
-  cancelAnimationFrame(bounceRaf);
-  bounceRaf=requestAnimationFrame(move);
+  requestAnimationFrame(move);
+}
+function startBouncingVideo(){
+  if(bouncingStarted)return;
+  const source=$('bouncingVideo');
+  if(!source)return;
+  bouncingStarted=true;
+  let count=0;
+  const addVideo=()=>{
+    if(count>=5){clearInterval(bouncingSpawnTimer);return}
+    const video=count===0?source:source.cloneNode(true);
+    if(count>0)document.body.appendChild(video);
+    launchBouncingInstance(video,count);
+    count++;
+  };
+  addVideo();
+  bouncingSpawnTimer=setInterval(addVideo,2000);
 }
 function showCelebration(){if(finished)return;finished=true;$('countdown').innerHTML='<div class="done" style="grid-column:1/-1">🎊 WAKTUNYA TIBA! 🎊</div>';$('status').textContent='Target 2 September 2026, 19.00 WIB telah tercapai!';$('celebration').classList.add('active');$('celebration').setAttribute('aria-hidden','false');launchConfetti();startBouncingVideo();try{playMusic();setTimeout(()=>{if(finished)$('musicButton').classList.add('show')},1200)}catch(e){$('musicButton').classList.add('show')}}function updateCountdown(){updateCurrentDateTime();const remaining=target-Date.now();if(remaining<=0){showCelebration();return}const total=Math.floor(remaining/1000),days=Math.floor(total/86400),hours=Math.floor(total%86400/3600),minutes=Math.floor(total%3600/60),seconds=total%60;$('days').textContent=days;$('hours').textContent=pad(hours);$('minutes').textContent=pad(minutes);$('seconds').textContent=pad(seconds)}function init3D(){if(!matchMedia('(pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const scene=$('scene'),orb=$('orb');addEventListener('pointermove',e=>{if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;document.documentElement.style.setProperty('--mx',`${e.clientX}px`);document.documentElement.style.setProperty('--my',`${e.clientY}px`);scene.style.setProperty('--rx',`${-y*2}deg`);scene.style.setProperty('--ry',`${x*3}deg`);orb.style.setProperty('--ox',`${x*80}px`);orb.style.setProperty('--oy',`${y*60}px`)})},{passive:true})}$('musicButton').addEventListener('click',playMusic);if(VIDEO_TEST_MODE)startBouncingVideo();updateCountdown();init3D();setInterval(updateCountdown,1000);
 </script></body></html>
